@@ -1,0 +1,11 @@
+services:
+  ai_assistant_microservice:
+    container_name: ai_assistant_microservice
+    build:
+      context: backend/services/ai_assistant_service
+      dockerfile: ./Dockerfile
+    restart: on-failure
+    env_file: .env
+    ports:
+      - ${UVICORN_PORT}:${UVICORN_PORT}
+    command: bash -c "uvicorn main:app --host ${UVICORN_HOST} --port ${UVICORN_PORT}"
